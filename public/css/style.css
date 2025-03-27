@@ -1,4 +1,3 @@
-
 :root {
     --rosa: #f8c8dc;
     --blanco: #ffffff;
@@ -14,14 +13,12 @@
     font-family: Arial, sans-serif;
 }
 
-
 body {
     background-color: var(--gris);
     color: #333;
     text-align: center;
     padding: 20px;
 }
-
 
 nav {
     background-color: var(--rosa);
@@ -64,7 +61,6 @@ h1 {
 p {
     font-size: 18px;
 }
-
 
 footer {
     margin-top: 30px;
