@@ -16,4 +16,13 @@ router.get('/login', (req, res)=>{
 })
 
 
+
+router.get('/docente', (req, res)=>{
+    res.render('indexDocente',{
+        title: 'Docente',
+        css: 'style.css'
+    })
+})
+
+
 module.exports = router
