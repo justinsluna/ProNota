@@ -1,11 +1,9 @@
-<%- include('./layouts/navbar') %>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProNota Portal Maestros</title>
+    <title>ProNota Docente</title>
     <style>
         * {
             margin: 0;
@@ -116,19 +114,81 @@
             border-radius: 3px;
         }
         
-        .save-btn {
-            background-color: #2ecc71;
+        .buttons-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px; /* Espacio entre botones */
+        margin-top: 20px;
+        clear: both;
+    }
+    
+    .save-btn {
+        background-color: #2edd77;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    .print-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+        
+        .save-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Estilos para el botón de imprimir */
+        .print-btn {
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 3px;
             cursor: pointer;
             margin-top: 20px;
+            margin-right: 10px;
             float: right;
         }
         
-        .save-btn:hover {
-            background-color: #27ae60;
+        .print-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Estilos para la impresión */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body, .container, .students-container {
+                margin: 0;
+                padding: 0;
+                background: white;
+                box-shadow: none;
+            }
+            
+            table {
+                width: 100%;
+                border: 1px solid #000;
+            }
+            
+            th, td {
+                border: 1px solid #000;
+                padding: 8px;
+            }
+            
+            input[type="number"] {
+                border: none;
+                width: auto;
+                padding: 0;
+            }
         }
     </style>
 </head>
@@ -152,7 +212,7 @@
         </div>
         
         <div class="students-container" id="studentsContainer">
-            <button class="back-btn" onclick="hideGroup()">← Regresar</button>
+            <button class="back-btn no-print" onclick="hideGroup()">← Regresar</button>
             <h2 id="groupTitle">Alumnos del Grupo A</h2>
             <table>
                 <thead>
@@ -169,7 +229,11 @@
                     <!-- Datos de alumnos se llenarán con JavaScript -->
                 </tbody>
             </table>
-            <button class="save-btn" onclick="saveGrades()">Guardar Calificaciones</button>
+            <div class="buttons-container no-print">
+                <button class="print-btn" onclick="printBoleta()">Imprimir Boleta</button>
+                <button class="save-btn" onclick="saveGrades()">Guardar Calificaciones</button>
+            </div>
+            <div style="clear: both;"></div>
         </div>
     </div>
 
@@ -259,6 +323,11 @@
         function saveGrades() {
             alert('Calificaciones guardadas correctamente');
             // Aquí iría el código para enviar las calificaciones al servidor
+        }
+
+        // Función para imprimir la boleta
+        function printBoleta() {
+            window.print();
         }
     </script>
 </body>
