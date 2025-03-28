@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProNota Docente</title>
     <style>
-        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
@@ -47,7 +46,6 @@
             cursor: pointer;
         }
         
-        /* Estilos del menú principal */
         .main-menu {
             display: flex;
             justify-content: center;
@@ -72,7 +70,6 @@
             background-color: #5a595a;
         }
         
-        /* Estilos del contenedor de estudiantes */
         .students-container {
             display: none;
             background-color: white;
@@ -91,7 +88,6 @@
             margin-bottom: 20px;
         }
         
-        /* Estilos de la tabla */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -109,7 +105,6 @@
             font-weight: bold;
         }
         
-        /* Estilos de los inputs */
         .calificacion-input {
             width: 70px;
             padding: 8px;
@@ -125,7 +120,6 @@
             box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
-        /* Estilo para el campo de promedio */
         .promedio-field {
             width: 70px;
             padding: 8px;
@@ -138,7 +132,6 @@
             color: #2c3e50;
         }
         
-        /* Contenedor de botones */
         .buttons-container {
             display: flex;
             justify-content: flex-end;
@@ -176,7 +169,6 @@
             background-color: #2980b9;
         }
         
-        /* Estilos para impresión */
         @media print {
             body * {
                 visibility: hidden;
@@ -285,7 +277,6 @@
                     </tr>
                 </thead>
                 <tbody id="studentsTable">
-                    <!-- Datos se llenarán con JavaScript -->
                 </tbody>
             </table>
             <div class="buttons-container">
@@ -295,7 +286,6 @@
         </div>
     </div>
 
-    <!-- Contenido para imprimir (oculto inicialmente) -->
     <div id="printableContent" style="display: none;">
         <div class="print-header">
             <div class="print-title">BOLETA DE CALIFICACIONES</div>
@@ -321,13 +311,11 @@
                 </tr>
             </thead>
             <tbody id="printStudentsTable">
-                <!-- Datos se llenarán con JavaScript -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // Datos completos de los grupos con calificaciones iniciales
         const groups = {
             'A': [
                 { id: 'A001', name: 'Ana García', p1: 8.5, p2: 9.0, p3: 0.0 },
@@ -397,10 +385,8 @@
             ]
         };
 
-        // Variable para guardar el grupo actual
         let currentGroup = '';
         
-        // Mostrar un grupo específico
         function showGroup(group) {
             currentGroup = group;
             document.getElementById('mainMenu').style.display = 'none';
@@ -434,25 +420,19 @@
                     <td><span class="promedio-field" id="${student.id}-promedio"></span></td>
                 `;
                 tableBody.appendChild(row);
-                // Calcular promedio inicial para cada estudiante
                 calcularPromedio(student.id);
             });
         }
         
-        // Calcular el promedio de un estudiante
         function calcularPromedio(studentId) {
-            // Obtener los valores de los inputs
             const p1 = parseFloat(document.getElementById(`${studentId}-p1`).value) || 0;
             const p2 = parseFloat(document.getElementById(`${studentId}-p2`).value) || 0;
             const p3 = parseFloat(document.getElementById(`${studentId}-p3`).value) || 0;
             
-            // Calcular el promedio con 1 decimal
             const promedio = ((p1 + p2 + p3) / 3).toFixed(1);
             
-            // Mostrar el promedio en el campo correspondiente
             document.getElementById(`${studentId}-promedio`).textContent = promedio;
             
-            // Actualizar los datos en memoria
             const student = groups[currentGroup].find(s => s.id === studentId);
             if (student) {
                 student.p1 = p1;
@@ -461,24 +441,17 @@
             }
         }
         
-        // Regresar al menú principal
         function hideGroup() {
             document.getElementById('mainMenu').style.display = 'flex';
             document.getElementById('studentsContainer').style.display = 'none';
         }
         
-        // Guardar las calificaciones (simulado)
         function saveGrades() {
-            // Aquí normalmente enviarías los datos al servidor
             console.log('Calificaciones guardadas:', groups[currentGroup]);
-            
-            // Mostrar mensaje al usuario
             alert('Las calificaciones se han guardado correctamente');
         }
         
-        // Preparar y mostrar la versión para imprimir
         function preparePrint() {
-            // Actualizar la fecha actual
             const today = new Date();
             document.getElementById('printDate').textContent = today.toLocaleDateString('es-MX', {
                 day: '2-digit',
@@ -486,18 +459,15 @@
                 year: 'numeric'
             });
             
-            // Llenar la tabla para imprimir
             const printTableBody = document.getElementById('printStudentsTable');
             printTableBody.innerHTML = '';
             
             groups[currentGroup].forEach((student, index) => {
-                // Obtener las calificaciones actuales (de los inputs o de los datos guardados)
                 const p1 = parseFloat(document.getElementById(`${student.id}-p1`)?.value) || student.p1 || 0;
                 const p2 = parseFloat(document.getElementById(`${student.id}-p2`)?.value) || student.p2 || 0;
                 const p3 = parseFloat(document.getElementById(`${student.id}-p3`)?.value) || student.p3 || 0;
                 const promedio = ((p1 + p2 + p3) / 3).toFixed(1);
                 
-                // Crear la fila para la tabla de impresión
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${index + 1}</td>
@@ -511,11 +481,9 @@
                 printTableBody.appendChild(row);
             });
             
-            // Mostrar el contenido imprimible y ejecutar la impresión
             document.getElementById('printableContent').style.display = 'block';
             window.print();
             
-            // Ocultar el contenido imprimible después de un breve retraso
             setTimeout(() => {
                 document.getElementById('printableContent').style.display = 'none';
             }, 100);
