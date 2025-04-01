@@ -1,0 +1,44 @@
+<%- include('./layouts/header') %>
+
+<body>
+    <div class="container mt-4">
+        <header class="text-center">
+            <h1><i class="fas fa-graduation-cap"></i> Sistema Integral de Información Escolar</h1>
+            <p>Portal del Alumno</p>
+        </header>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="fs-5">Bienvenid@, <strong><%= alumno.nombre %></strong>!</span>
+            <a href="/logout" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+            </a>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2 class="card-title"><i class="fas fa-file-alt"></i> Calificaciones</h2>
+                <table class="table table-bordered mt-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Materia</th>
+                            <th>Calificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% calificaciones.forEach(calif => { %>
+                            <tr>
+                                <td><%= calif.materia %></td>
+                                <td><%= calif.nota %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+                <a href="/descargar-pdf" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Descargar PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include('./layouts/footer') %>

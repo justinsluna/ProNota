@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router()
+const alumnoRoutes = require('./routes/alumnoRoutes');
+app.use(alumnoRoutes);
 
 router.get('/inicio', (req, res)=>{
     res.render('index',{
@@ -15,11 +17,18 @@ router.get('/login', (req, res)=>{
     })
 })
 
-
-
 router.get('/docente', (req, res)=>{
     res.render('indexDocente',{
         title: 'Docente'
+    })
+})
+
+router.get('/alumno', (req, res)=>{
+    res.render('IndexAlumno',{
+        title: 'Alumno',
+        css: 'style.css',
+        css: 'style2.css'
+        
     })
 })
 
