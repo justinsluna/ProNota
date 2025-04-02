@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize'); // Importación correcta
 
 // Crear la instancia de Sequelize
-const db = new Sequelize('dwp', 'root', '', {  
+const db = new Sequelize('siie', 'root', '', {  
     host: 'localhost',
     dialect: 'mysql'
 });
