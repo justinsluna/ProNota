@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router()
-const alumnoRoutes = require('./routes/alumnoRoutes');
-app.use(alumnoRoutes);
 
 router.get('/inicio', (req, res)=>{
     res.render('index',{

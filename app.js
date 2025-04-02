@@ -15,3 +15,11 @@ app.use('/', router);
 app.listen(port, ()=>{
     console.log(`server is running on port ${port}`)
 });
+
+const sequelize = require('./config/database');
+const Alumno = require('./models/Alumno');
+const Calificacion = require('./models/Calificacion');
+
+sequelize.sync({ force: false }) // Cambia a `true` si quieres borrar y recrear la BD en cada inicio
+    .then(() => console.log('Base de datos sincronizada'))
+    .catch(error => console.error('Error al sincronizar BD:', error));
